@@ -1,0 +1,15 @@
+.tab {
+    -fx-pref-width: 200;
+}
+.tab-header-background {
+    -fx-background-color:transparent;
+}
+.chart-line-symbol {
+    -fx-background-insets: 0,0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0px;
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+
