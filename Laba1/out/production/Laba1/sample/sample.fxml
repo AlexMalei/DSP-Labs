@@ -184,6 +184,37 @@
                   </AnchorPane>
               </content>
             </Tab>
+            <Tab text="4">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <LineChart fx:id="chart4" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="600.0">
+                              <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                              </xAxis>
+                              <yAxis>
+                                  <NumberAxis side="LEFT" />
+                              </yAxis>
+                          </LineChart>
+                          <Button fx:id="btnTask4Build" layoutX="700.0" layoutY="550.0" mnemonicParsing="false" onAction="#task4Start" text="Построить" />
+
+                          <Label layoutX="703.0" layoutY="180.0" text="N">
+                              <font>
+                                  <Font size="21.0" />
+                              </font>
+                          </Label>
+                          <RadioButton layoutX="700.0" layoutY="210.0" mnemonicParsing="false" text="512" toggleGroup="$n5">
+                              <toggleGroup>
+                                  <ToggleGroup fx:id="n5" />
+                              </toggleGroup>
+                          </RadioButton>
+                          <RadioButton layoutX="700.0" layoutY="230.0" mnemonicParsing="false" text="1024" toggleGroup="$n5" />
+                          <RadioButton layoutX="700.0" layoutY="250.0" mnemonicParsing="false" text="2048" toggleGroup="$n5" />
+                          <RadioButton layoutX="700.0" layoutY="270.0" mnemonicParsing="false" text="4096" toggleGroup="$n5" />
+                      </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
