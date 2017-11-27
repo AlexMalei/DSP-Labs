@@ -92,7 +92,7 @@ public class Controller {
         chart3.getData().clear();
         XYChart.Series series = new XYChart.Series();
 
-        for (int n = 0; n <= 2*N; n++) {
+        for (int n = 0; n <= 2 * N; n++) {
             double funcValue = 0;
 
             for (int k = 0; k < 5; k++) {
@@ -114,7 +114,7 @@ public class Controller {
         chart4.getData().clear();
         XYChart.Series series = new XYChart.Series();
         double[] multipliers = {0.20 / (N / frequency[0]), 0.20 / (N / frequency[1]), 0.20 / (N / frequency[2]), 0.20 / (N / frequency[3]), 0.20 / (N / frequency[4])};
-        for (int n = 0; n <= 2*N; n++) {
+        for (int n = 0; n <= 2 * N; n++) {
             double funcValue = 0;
             for (int k = 0; k < 5; k++) {
                 funcValue += getFunctionResult(phase[k], amplitude[k], frequency[k], N, n);
@@ -140,7 +140,7 @@ public class Controller {
         chart.getData().clear();
         XYChart.Series series = new XYChart.Series();
 
-        for (int n = 0; n <= 2*N; n++) {
+        for (int n = 0; n <= N; n++) {
             series.getData().add(new XYChart.Data<>(String.valueOf(n), getFunctionResult(phase, amplitude, frequency, N, n)));
         }
         series.setName(String.format("x(n) = %s * sin( 2 * π * %s * n / N + %s )", amplitude, frequency, phase));
