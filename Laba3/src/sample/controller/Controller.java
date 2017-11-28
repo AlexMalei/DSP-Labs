@@ -6,6 +6,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import sample.model.Harmonic;
 import sample.model.PolyharmonicSignal;
@@ -48,6 +49,16 @@ public class Controller {
     @FXML
     LineChart chartFilterSignal;
 
+    @FXML
+    ToggleGroup typeFilter;
+
+    @FXML
+    TextField txtFldValue;
+    @FXML
+    BarChart chartAmplitudeSpecterFilter;
+    @FXML
+    BarChart chartAmplitudeSpecterFilterAfter;
+
     public void buildPolyharmonicSignalAndFilter() {
         setChartProperties(chartFilterSignal);
         chartFilterSignal.getData().clear();
@@ -55,20 +66,37 @@ public class Controller {
         RadioButton rbN = (RadioButton) nFilter.getSelectedToggle();
         int N = Integer.parseInt(rbN.getText());
 
+        RadioButton typeFilterRB = (RadioButton) typeFilter.getSelectedToggle();
+
+        boolean isHF = typeFilterRB.getText().equals("ВЧ");
+        int valueFrequency = Integer.parseInt(txtFldValue.getText());
+
         PolyharmonicSignal polyharmonicSignal = new PolyharmonicSignal(N);
         polyharmonicSignal.formSignal();
         polyharmonicSignal.buildGraph(chartFilterSignal);
 
         Harmonic[] harmonics = polyharmonicSignal.formHarmonics();
-        List<Harmonic> harmonicsList = Arrays.asList(harmonics);
-        for (Harmonic harmonic : harmonicsList){
+        buildAmplitudeSpecter(harmonics, chartAmplitudeSpecterFilter);
+        //List<Harmonic> harmonicsList = Arrays.asList(harmonics);
+        if (isHF){
+            for (int i = 0; i < valueFrequency; i++){
+                harmonics[i].setAsin(0);
+                harmonics[i].setAcos(0);
+            }
+        } else {
+            for (int i = valueFrequency; i < harmonics.length; i++){
+                harmonics[i].setAsin(0);
+                harmonics[i].setAcos(0);
+            }
+        }
+        buildAmplitudeSpecter(harmonics, chartAmplitudeSpecterFilterAfter);
+        /*for (Harmonic harmonic : harmonicsList){
             if (harmonic.getAmplitude() < 1){
                 harmonic.setAcos(0.0);
                 harmonic.setAsin(0.0);
             }
-
-        }
-        harmonics = harmonicsList.toArray(new Harmonic[harmonicsList.size()]);
+        }*/
+       // harmonics = harmonicsList.toArray(new Harmonic[harmonicsList.size()]);
 
         PolyharmonicSignal restoredSignal = new PolyharmonicSignal(harmonics.length * 2);
         restoredSignal.restoreFromHarmonics(harmonics);

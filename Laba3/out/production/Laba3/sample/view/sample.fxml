@@ -118,59 +118,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Быстрое преобразование Фурье">
-                <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                            <AnchorPane prefHeight="820.0" prefWidth="1243.0">
-                                <children>
-                                    <Pane layoutY="6.0" prefHeight="812.0" prefWidth="1243.0">
-                                        <children>
-                                            <LineChart fx:id="chartPHhSignal" layoutY="7.0" prefHeight="328.0" prefWidth="868.0" title="Полигармонический сигнал">
-                                                <xAxis>
-                                                    <CategoryAxis side="BOTTOM" />
-                                                </xAxis>
-                                                <yAxis>
-                                                    <NumberAxis side="LEFT" />
-                                                </yAxis>
-                                            </LineChart>
-                                            <Button fx:id="btnBuildPolyharmonicSignalFFT" layoutX="999.0" layoutY="56.0" mnemonicParsing="false" onAction="#buildPolyharmonicSignal" text="Построить" />
-                                            <Label layoutX="1016.0" layoutY="118.0" text="N">
-                                                <font>
-                                                    <Font size="21.0" />
-                                                </font>
-                                            </Label>
-                                            <RadioButton layoutX="1013.0" layoutY="148.0" mnemonicParsing="false" selected="true" text="128">
-                                                <toggleGroup>
-                                                    <ToggleGroup fx:id="nPHToggleFFT" />
-                                                </toggleGroup>
-                                            </RadioButton>
-                                            <RadioButton layoutX="1013.0" layoutY="168.0" mnemonicParsing="false" text="256" toggleGroup="$nPHToggleFFT" />
-                                            <RadioButton layoutX="1013.0" layoutY="188.0" mnemonicParsing="false" text="512" toggleGroup="$nPHToggleFFT" />
-                                            <RadioButton layoutX="1013.0" layoutY="208.0" mnemonicParsing="false" text="1024" toggleGroup="$nPHToggleFFT" />
-                                            <BarChart fx:id="chartAmplitudeFFT" layoutY="400.0" prefHeight="400.0" prefWidth="600.0" title="Амплитудный спектр">
-                                                <xAxis>
-                                                    <CategoryAxis side="BOTTOM" />
-                                                </xAxis>
-                                                <yAxis>
-                                                    <NumberAxis side="LEFT" />
-                                                </yAxis>
-                                            </BarChart>
-                                            <BarChart fx:id="chartPhaseFFT" layoutX="600.0" layoutY="400.0" prefHeight="400.0" prefWidth="600.0" title="Фазовый спектр">
-                                                <xAxis>
-                                                    <CategoryAxis side="BOTTOM" />
-                                                </xAxis>
-                                                <yAxis>
-                                                    <NumberAxis side="LEFT" />
-                                                </yAxis>
-                                            </BarChart>
-                                        </children>
-                                    </Pane>
-                                </children>
-                            </AnchorPane>
-                        </children></AnchorPane>
-                </content>
-            </Tab>
+
             <Tab text="Фильтр">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -197,6 +145,35 @@
                          <RadioButton layoutX="1013.0" layoutY="168.0" mnemonicParsing="false" text="256" toggleGroup="$nFilter" />
                          <RadioButton layoutX="1013.0" layoutY="188.0" mnemonicParsing="false" text="512" toggleGroup="$nFilter" />
                          <RadioButton layoutX="1013.0" layoutY="208.0" mnemonicParsing="false" text="1024" toggleGroup="$nFilter" />
+
+                         <Label layoutX="1016.0" layoutY="290" text="Вид Фильтра">
+                             <font>
+                                 <Font size="21.0" />
+                             </font>
+                         </Label>
+                         <RadioButton layoutX="1013.0" layoutY="320" mnemonicParsing="false" selected="true" text="ВЧ">
+                             <toggleGroup>
+                                 <ToggleGroup fx:id="typeFilter" />
+                             </toggleGroup>
+                         </RadioButton>
+                         <RadioButton layoutX="1013.0" layoutY="340" mnemonicParsing="false" text="НЧ" toggleGroup="$typeFilter" />
+                         <BarChart fx:id="chartAmplitudeSpecterFilter" layoutY="400.0" prefHeight="400.0" prefWidth="600.0">
+                             <xAxis>
+                                 <CategoryAxis side="BOTTOM" />
+                             </xAxis>
+                             <yAxis>
+                                 <NumberAxis side="LEFT" />
+                             </yAxis>
+                         </BarChart>
+                         <BarChart fx:id="chartAmplitudeSpecterFilterAfter" layoutX="622.0" layoutY="409.0" prefHeight="400.0" prefWidth="600.0">
+                             <xAxis>
+                                 <CategoryAxis side="BOTTOM" />
+                             </xAxis>
+                             <yAxis>
+                                 <NumberAxis side="LEFT" />
+                             </yAxis>
+                         </BarChart>
+                         <TextField fx:id="txtFldValue" layoutX="1013.0" layoutY="380.0" prefHeight="25.0" prefWidth="42.0" text="40" />
                      </children>
                   </AnchorPane>
               </content>
