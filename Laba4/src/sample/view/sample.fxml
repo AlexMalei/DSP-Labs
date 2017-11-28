@@ -49,14 +49,14 @@
                         <TextField fx:id="txtFldB1" layoutX="678.0" layoutY="29.0" prefHeight="25.0" prefWidth="42.0" text="100" />
                         <Label layoutX="654.0" layoutY="66.0" text="B2" />
                         <TextField fx:id="txtFldB2" layoutX="678.0" layoutY="62.0" prefHeight="25.0" prefWidth="42.0" text="2" />
-                        <LineChart fx:id="chartOrginalSpectr" layoutX="30.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0" title="Спектр">
+                        <BarChart fx:id="chartOrginalSpectr" layoutX="30.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0" title="Спектр">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis side="LEFT" />
                           </yAxis>
-                        </LineChart>
+                        </BarChart>
                             </children>
                         </AnchorPane>
                     </content>
@@ -74,14 +74,14 @@
                                     </yAxis>
                                 </LineChart>
                                 <Button fx:id="btnParabolaAntialiasing" layoutX="750.0" layoutY="650.0" mnemonicParsing="false" onAction="#buildAntaliasingParabola" text="Построить" />
-                        <LineChart fx:id="chartParabola4thDegreeSpectr" layoutX="28.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0">
+                        <BarChart fx:id="chartParabola4thDegreeSpectr" layoutX="28.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis side="LEFT" />
                           </yAxis>
-                        </LineChart>
+                        </BarChart>
                             </children>
                         </AnchorPane>
                     </content>
@@ -98,6 +98,14 @@
                                         <NumberAxis side="LEFT" />
                                     </yAxis>
                                 </LineChart>
+                                <BarChart fx:id="chartMedianFilterSpectr" layoutX="28.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </BarChart>
                                 <Button fx:id="btnMedianFilterAntialiasing" layoutX="750.0" layoutY="650.0" mnemonicParsing="false" onAction="#buildAntialiasingMedianFilter" text="Построить" />
                             </children>
                         </AnchorPane>
@@ -115,6 +123,14 @@
                                         <NumberAxis side="LEFT" />
                                     </yAxis>
                                 </LineChart>
+                                <BarChart fx:id="chartMedianAveragingSpectr" layoutX="28.0" layoutY="370.0" prefHeight="350.0" prefWidth="600.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </BarChart>
                                 <Button fx:id="btnMedianAveragingAntialiasing" layoutX="750.0" layoutY="650.0" mnemonicParsing="false" onAction="#buildAntialiasingMedianAveraging" text="Построить" />
                             </children>
                         </AnchorPane>

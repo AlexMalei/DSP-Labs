@@ -61,8 +61,8 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1066">
-              <caret line="74" column="53" lean-forward="true" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
+            <state relative-caret-position="430">
+              <caret line="141" column="5" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="141" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,8 +73,8 @@
       <file leaf-file-name="PolyharmonicSignal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/model/PolyharmonicSignal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
-              <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+            <state relative-caret-position="464">
+              <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#383#384#0" expanded="true" />
@@ -189,10 +189,10 @@
         <option value="$PROJECT_DIR$/src/sample/model/AmplitudeComponent.java" />
         <option value="$PROJECT_DIR$/src/sample/model/Signal.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
-        <option value="$PROJECT_DIR$/src/sample/model/PolyharmonicSignal.java" />
         <option value="$PROJECT_DIR$/src/sample/view/sample.fxml" />
         <option value="$PROJECT_DIR$/src/sample/model/Harmonic.java" />
         <option value="$PROJECT_DIR$/src/sample/controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/sample/model/PolyharmonicSignal.java" />
       </list>
     </option>
   </component>
@@ -472,12 +472,12 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1511776455893" duration="25808000" />
+      <workItem from="1511776455893" duration="27519000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27110000" />
+    <option name="totallyTimeSpent" value="28821000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -544,7 +544,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/model/PolyharmonicSignal.java</url>
-          <line>82</line>
+          <line>75</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
@@ -718,8 +718,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/model/PolyharmonicSignal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+        <state relative-caret-position="464">
+          <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#383#384#0" expanded="true" />
@@ -732,8 +732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1066">
-          <caret line="74" column="53" lean-forward="true" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
+        <state relative-caret-position="430">
+          <caret line="141" column="5" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="141" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

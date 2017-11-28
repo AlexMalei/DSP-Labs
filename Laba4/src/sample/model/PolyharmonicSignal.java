@@ -7,8 +7,10 @@ import java.util.Random;
 public class PolyharmonicSignal {
     private int N;
     private double[] discreteValues;
-    private int[] amplitudesForRandom = {2, 3, 5, 9, 10, 12, 15};
-    private double[] phasesForRandom = {Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, 3 * Math.PI / 4, Math.PI};
+    private static Random random = new Random();
+    private int B1;
+    private int B2;
+
 
     public int getN() {
         return N;
@@ -19,31 +21,41 @@ public class PolyharmonicSignal {
         return discreteValues[index];
     }
 
+    public double[] getDiscreteValue() {
+        return discreteValues;
+    }
 
-    public PolyharmonicSignal(int N) {
+    public PolyharmonicSignal(double[] discreteValues){
+        this.discreteValues = discreteValues;
+        this.N = discreteValues.length;
+    }
+
+    public PolyharmonicSignal(int N, int B1, int B2) {
         this.N = N;
         discreteValues = new double[N];
+        this.B1 = B1;
+        this.B2 = B2;
     }
 
 
     public void formSignal() {
+        double signalValue;
+        double noiseValue;
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < 30; j++) {
-                discreteValues[i] = getRandomAmplitude() * Math.cos(2 * Math.PI * i * j / N - getRandomPhase());
+            noiseValue = 0;
+            for (int j = 50; j <= 70; j++) {
+                noiseValue += Math.pow(-1, getRandomValue()) * B2 * Math.sin(2 * Math.PI * i * j / N);
             }
-
+            signalValue = B1 * Math.sin(2 * Math.PI * i / N) + noiseValue;
+            discreteValues[i] = signalValue;
         }
+
     }
 
-    private double getRandomPhase() {
-        Random random = new Random();
-        return phasesForRandom[random.nextInt(5)];
+    private static double getRandomValue() {
+        return (random.nextDouble() > 0.5f) ? 1f : 0f;
     }
 
-    private double getRandomAmplitude() {
-        Random random = new Random();
-        return amplitudesForRandom[random.nextInt(6)];
-    }
 
     public Harmonic[] formHarmonics() {
         Harmonic[] harmonics = new Harmonic[N / 2];
@@ -71,21 +83,7 @@ public class PolyharmonicSignal {
         chart.getData().add(series);
     }
 
-    public void restoreFromHarmonics(Harmonic[] harmonics) {
-        for (int i = 0; i < N; i++) {
-            discreteValues[i] = harmonics[0].getAmplitude() / 2;
-            for (int j = 1; j < harmonics.length; j++) {
-                discreteValues[i] += harmonics[j].getAmplitude() * Math.cos(2 * Math.PI * j * i / N - harmonics[j].getPhase());
-            }
-        }
-    }
 
-    public void restoreFromHarmonicsWithoutPhase(Harmonic[] harmonics) {
-        for (int i = 0; i < N; i++) {
-            discreteValues[i] = harmonics[0].getAmplitude() / 2;
-            for (int j = 1; j < harmonics.length; j++) {
-                discreteValues[i] += harmonics[j].getAmplitude() * Math.cos(2 * Math.PI * j * i / N);
-            }
-        }
-    }
+
+
 }

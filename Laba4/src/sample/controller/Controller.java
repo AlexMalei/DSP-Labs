@@ -2,12 +2,15 @@ package sample.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import sample.model.AntialiasingCore;
+import sample.model.Harmonic;
+import sample.model.PolyharmonicSignal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,95 +30,109 @@ public class Controller {
     private LineChart chartOriginalSignal;
 
     @FXML
+    private BarChart chartOrginalSpectr;
+
+    @FXML
     private LineChart chartParabola4thDegree;
 
     @FXML
-    private LineChart chartParabola4thDegreeSpectr;
+    private BarChart chartParabola4thDegreeSpectr;
 
     @FXML
     private LineChart chartMedianFilter;
+    @FXML
+    private BarChart chartMedianFilterSpectr;
 
     @FXML
     private LineChart chartMedianAveraging;
+    @FXML
+    private BarChart chartMedianAveragingSpectr;
 
     @FXML
     private ToggleGroup nToggle;
 
-    private double[] originalDiscreteValues;
+    PolyharmonicSignal polyharmonicSignal;
 
-    private static Random random = new Random();
+
 
 
 
 
     public void buildOriginalSignal() {
+        setChartProperties(chartOriginalSignal);
+        chartOriginalSignal.getData().clear();
+
         RadioButton rbN = (RadioButton) nToggle.getSelectedToggle();
         int N = Integer.parseInt(rbN.getText());
-        originalDiscreteValues = new double[N];
         int B1 = Integer.parseInt(txtFldB1.getText());
         int B2 = Integer.parseInt(txtFldB2.getText());
-        double signalValue;
-        double noiseValue;
 
+        polyharmonicSignal = new PolyharmonicSignal(N, B1, B2);
+        polyharmonicSignal.formSignal();
+        polyharmonicSignal.buildGraph(chartOriginalSignal);
+        Harmonic[] harmonics = polyharmonicSignal.formHarmonics();
+        buildAmplitudeSpecter(harmonics, chartOrginalSpectr);
+
+    }
+
+    private void buildAmplitudeSpecter(Harmonic[] harmonics, XYChart chart) {
         XYChart.Series series = new XYChart.Series();
-        for (int i = 0; i < N; i++) {
-            noiseValue = 0;
-            for (int j = 50; j <= 70; j++) {
-                noiseValue += Math.pow(-1, getRandomValue()) * B2 * Math.sin(2 * Math.PI * i * j / N);
-            }
-            signalValue = B1 * Math.sin(2 * Math.PI * i / N) + noiseValue;
-            originalDiscreteValues[i] = signalValue;
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), signalValue));
+        for (int j = 0; j < harmonics.length; j++) {
+            series.getData().add(new XYChart.Data<>(String.valueOf(j), harmonics[j].getAmplitude()));
         }
-
-        chartOriginalSignal.getData().clear();
-        setChartProperties(chartOriginalSignal);
-        chartOriginalSignal.getData().add(series);
+        chart.getData().clear();
+        setChartProperties(chart);
+        chart.getData().add(series);
     }
 
     public void buildAntaliasingParabola(){
-        AntialiasingCore antialiasingCore = new AntialiasingCore();
-        double[] antialiasingValues = antialiasingCore.fourthDegreeParabolaAntialiasing(originalDiscreteValues);
-        XYChart.Series series = new XYChart.Series();
-        for (int i = 0; i < antialiasingValues.length; i++){
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), antialiasingValues[i]));
-        }
         chartParabola4thDegree.getData().clear();
+        chartParabola4thDegreeSpectr.getData().clear();
         setChartProperties(chartParabola4thDegree);
-        chartParabola4thDegree.getData().add(series);
+        setChartProperties(chartParabola4thDegreeSpectr);
+
+        AntialiasingCore antialiasingCore = new AntialiasingCore();
+        double[] antialiasingValues = antialiasingCore.fourthDegreeParabolaAntialiasing(polyharmonicSignal.getDiscreteValue());
+
+        PolyharmonicSignal antialiasingSignal = new PolyharmonicSignal(antialiasingValues);
+        antialiasingSignal.buildGraph(chartParabola4thDegree);
+        Harmonic[] harmonics = antialiasingSignal.formHarmonics();
+        buildAmplitudeSpecter(harmonics, chartParabola4thDegreeSpectr);
     }
 
     public void buildAntialiasingMedianFilter(){
-        AntialiasingCore antialiasingCore = new AntialiasingCore();
-        double[] antialiasingValues = antialiasingCore.medianFilterAntialiasing(originalDiscreteValues);
-        XYChart.Series series = new XYChart.Series();
-        for (int i = 0; i < antialiasingValues.length; i++){
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), antialiasingValues[i]));
-        }
-
         chartMedianFilter.getData().clear();
+        chartMedianFilterSpectr.getData().clear();
         setChartProperties(chartMedianFilter);
-        chartMedianFilter.getData().add(series);
+        setChartProperties(chartMedianFilterSpectr);
+
+        AntialiasingCore antialiasingCore = new AntialiasingCore();
+        double[] antialiasingValues = antialiasingCore.medianFilterAntialiasing(polyharmonicSignal.getDiscreteValue());
+
+        PolyharmonicSignal antialiasingSignal = new PolyharmonicSignal(antialiasingValues);
+        antialiasingSignal.buildGraph(chartMedianFilter);
+        Harmonic[] harmonics = antialiasingSignal.formHarmonics();
+        buildAmplitudeSpecter(harmonics, chartMedianFilterSpectr);
     }
 
     public void buildAntialiasingMedianAveraging(){
-        AntialiasingCore antialiasingCore = new AntialiasingCore();
-        double[] antialiasingValues = antialiasingCore.medianAveragingAntialiasing(originalDiscreteValues);
-        XYChart.Series series = new XYChart.Series();
-        for (int i = 0; i < antialiasingValues.length; i++){
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), antialiasingValues[i]));
-        }
-
         chartMedianAveraging.getData().clear();
+        chartMedianAveragingSpectr.getData().clear();
         setChartProperties(chartMedianAveraging);
-        chartMedianAveraging.getData().add(series);
+        setChartProperties(chartMedianAveragingSpectr);
+
+        AntialiasingCore antialiasingCore = new AntialiasingCore();
+        double[] antialiasingValues = antialiasingCore.medianAveragingAntialiasing(polyharmonicSignal.getDiscreteValue());
+
+        PolyharmonicSignal antialiasingSignal = new PolyharmonicSignal(antialiasingValues);
+        antialiasingSignal.buildGraph(chartMedianAveraging);
+        Harmonic[] harmonics = antialiasingSignal.formHarmonics();
+        buildAmplitudeSpecter(harmonics, chartMedianAveragingSpectr);
     }
 
-    private static double getRandomValue() {
-        return (random.nextDouble() > 0.5f) ? 1f : 0f;
-    }
 
-    private void setChartProperties(LineChart chart) {
+
+    private void setChartProperties(XYChart chart) {
         chart.setHorizontalGridLinesVisible(false);
         chart.setVerticalGridLinesVisible(false);
         for (Node n : chart.lookupAll(".chart-series-line")) {
