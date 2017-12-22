@@ -29,7 +29,7 @@ public class PolyharmonicSignal {
     public void formSignal() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < 30; j++) {
-                discreteValues[i] = getRandomAmplitude() * Math.cos(2 * Math.PI * i * j / N - getRandomPhase());
+                discreteValues[i] += getRandomAmplitude() * Math.cos(2 * Math.PI * i * j / N - getRandomPhase());
             }
 
         }

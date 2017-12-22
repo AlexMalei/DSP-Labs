@@ -90,13 +90,6 @@ public class Controller {
             }
         }
         buildAmplitudeSpecter(harmonics, chartAmplitudeSpecterFilterAfter);
-        /*for (Harmonic harmonic : harmonicsList){
-            if (harmonic.getAmplitude() < 1){
-                harmonic.setAcos(0.0);
-                harmonic.setAsin(0.0);
-            }
-        }*/
-       // harmonics = harmonicsList.toArray(new Harmonic[harmonicsList.size()]);
 
         PolyharmonicSignal restoredSignal = new PolyharmonicSignal(harmonics.length * 2);
         restoredSignal.restoreFromHarmonics(harmonics);
